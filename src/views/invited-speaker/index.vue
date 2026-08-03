@@ -95,7 +95,7 @@
           <el-divider></el-divider>
 
 
-          <el-form-item class="publication-label" :label="`發表作品${index + 1}:`"
+          <el-form-item class="publication-label" :label="`發表作品${Number(index) + 1}:`"
             v-for="(item, index) in addFormData.publication" :prop="`publication+${index}`">
             <div class="text-area-item-box">
               <el-input v-model="addFormData.publication[index]" type="textarea"></el-input>
@@ -107,7 +107,7 @@
           <el-divider></el-divider>
 
 
-          <el-form-item class="award-label" :label="`得獎經歷${index + 1}:`" v-for="(item, index) in addFormData.award"
+          <el-form-item class="award-label" :label="`得獎經歷${Number(index) + 1}:`" v-for="(item, index) in addFormData.award"
             :prop="`award+${index}`">
             <div class="text-area-item-box">
               <el-input v-model="addFormData.award[index]" type="textarea"></el-input>
@@ -240,7 +240,7 @@ onMounted(() => {
   getInvitedSpeakerByPagination();
 })
 
-const envMinio = import.meta.env.VITE_MINIO_API_URL;
+const envMinio = import.meta.env.VITE_MINIO_API;
 const envAPI = import.meta.env.VITE_APP_BASE_API;
 
 /**============================================ */
@@ -334,6 +334,7 @@ const editForm = reactive<any>({
   workExperience: [],
   publication: [],
   award: [],
+  isPublished: 1
 })
 
 
@@ -407,7 +408,7 @@ const deleteList = () => {
       await batchDeleteInvitedSpeakerApi(deleteIdList)
       ElMessage.success("刪除成功")
       getInvitedSpeakerByPagination()
-    }).catch((err) => {
+    }).catch((err: any) => {
     })
 
   } else {
