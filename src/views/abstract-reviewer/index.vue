@@ -61,9 +61,8 @@
       <el-form class="add-form" :model="addReviewerForm" ref="addReviewerFormRef" label-position="top">
         <el-form-item label="稿件類別" prop="absTypeList" :rules="addReviewerFormRules.absTypeList">
           <el-select v-model="addReviewerForm.absTypeList" multiple placeholder="請選擇">
-            <el-option label="Poster Presentation" value="Poster Presentation"></el-option>
-            <el-option label="Video Presentation" value="Video Presentation"></el-option>
-            <el-option label="Young Investigator" value="Young Investigator"></el-option>
+            <el-option v-for="item in abstractTypes" :key="item.value" :label="item.label"
+              :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="姓名" prop="name" :rules="addReviewerFormRules.name">
