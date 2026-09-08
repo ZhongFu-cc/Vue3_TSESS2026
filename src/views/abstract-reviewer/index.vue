@@ -90,12 +90,6 @@
         <el-form-item label="連絡電話" prop="phone" :rules="addReviewerFormRules.phone">
           <el-input v-model="addReviewerForm.phone" placeholder="填寫連絡電話"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="帳號" prop="account" :rules="addReviewerFormRules.account">
-          <el-input v-model="addReviewerForm.account" placeholder="填寫帳號"></el-input>
-        </el-form-item>
-        <el-form-item label="密碼" prop="password" :rules="addReviewerFormRules.password">
-          <el-input v-model="addReviewerForm.password" placeholder="填寫密碼"></el-input>
-        </el-form-item> -->
         <el-form-item>
           <el-button type="primary" @click="addPaperReviewer(addReviewerFormRef)">確定</el-button>
           <el-button @click="isAdd = false">取消</el-button>
@@ -107,9 +101,8 @@
       <el-form class="edit-form" :model="editReviewerForm" ref="editReviewerFormRef" label-position="top">
         <el-form-item label="稿件類別" prop="absTypeList" :rules="addReviewerFormRules.absTypeList">
           <el-select v-model="editReviewerForm.absTypeList" multiple placeholder="請選擇">
-            <el-option label="Poster Presentation" value="Poster Presentation"></el-option>
-            <el-option label="Video Presentation" value="Video Presentation"></el-option>
-            <el-option label="Young Investigator" value="Young Investigator"></el-option>
+            <el-option v-for="item in abstractTypes" :key="item.value" :label="item.label"
+              :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="姓名" prop="name" :rules="addReviewerFormRules.name">
@@ -194,6 +187,12 @@ import { genFileId, type FormInstance, type FormRules, type UploadInstance, type
 
 const currentPage = ref(1)
 
+const abstractTypes = ref([
+  { label: 'Research Presentation', value: 'Research Presentation' },
+  { label: 'Surgical Video Presentation', value: 'Surgical Video Presentation' },
+  { label: 'E-Poster', value: 'E-Poster' }
+])
+
 
 const reviewerList = reactive<any>([])
 const getReviewerList = async (page: number, size: number) => {
@@ -203,10 +202,6 @@ const getReviewerList = async (page: number, size: number) => {
   })
 
   Object.assign(reviewerList, res.data)
-
-
-
-
 }
 /**----------------------------------------------------------------- */
 
