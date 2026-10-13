@@ -17,9 +17,8 @@
         <div class="query-box">
           <el-input v-model="input" placeholder="輸入內容,Enter查詢" @input="getPaperList()" />
           <el-select v-model="filterAbsType" class="filter-abs-type" placeholder="請選擇投稿類型" @change="getPaperList()">
-            <el-option value="Poster Presentation"></el-option>
-            <el-option value="Video Presentation"></el-option>
-            <el-option value="Young Investigator"></el-option>
+            <el-option value="Surgical Video Presentation"></el-option>
+            <el-option value="Research Presentation"></el-option>
             <el-option value="" label="All"></el-option>
           </el-select>
         </div>
