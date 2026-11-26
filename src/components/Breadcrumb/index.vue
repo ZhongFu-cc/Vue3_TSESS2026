@@ -94,4 +94,22 @@ onBeforeMount(() => {
 .el-breadcrumb__inner a {
   font-weight: 400 !important;
 }
+
+// 文字不換行，避免窄螢幕下 navbar 跑版
+.el-breadcrumb {
+  flex-wrap: nowrap;
+  min-width: 0;
+  white-space: nowrap;
+
+  :deep(.el-breadcrumb__item) {
+    flex-shrink: 0;
+  }
+
+  // 手機版只顯示目前頁面，隱藏前面的層級
+  @media screen and (max-width: 760px) {
+    :deep(.el-breadcrumb__item:not(:last-child)) {
+      display: none;
+    }
+  }
+}
 </style>

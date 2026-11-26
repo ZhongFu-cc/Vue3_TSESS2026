@@ -2,9 +2,9 @@
   <section class="member-table-section">
     <el-table :data="props.memberData" @selection-change="$emit('mutli-delete-members', $event)" class="member-table">
       <el-table-column type="selection" width="30" />
-      <el-table-column v-if="isIndexView" fixed prop="firstName" label="名字" :width="isDevice ? '90' : ''"
+      <el-table-column v-if="isIndexView" :fixed="!isDevice" prop="firstName" label="名字" :width="isDevice ? '90' : ''"
         :show-overflow-tooltip="isDevice" />
-      <el-table-column v-if="isIndexView" fixed prop="lastName" label="姓氏" width="90" />
+      <el-table-column v-if="isIndexView" :fixed="!isDevice" prop="lastName" label="姓氏" width="90" />
       <el-table-column v-if="!isIndexView" prop="chineseName" label="姓名" width="100">
         <template #default="scope">
           <span v-if="scope.row.chineseName">{{ scope.row.chineseName }}</span>
@@ -32,7 +32,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column v-if="isIndexView" prop="tagList" label="標籤" min-width="40" align="center" width="150">
+      <el-table-column v-if="isIndexView" prop="tagList" label="標籤" min-width="150" align="center" width="200">
         <template #default="scope">
           <el-popover v-if="scope.row.tagList.length > 0" placement="left-start" title="標籤" :width="200" trigger="hover"
             class="tag-popover">
@@ -56,7 +56,7 @@
       </el-table-column>
 
 
-      <el-table-column fixed="right" label="操作" width="200">
+      <el-table-column :fixed="isDevice ? false : 'right'" label="操作" width="200">
         <!-- 透過#default="scope" , 獲取到當前的對象值 , scope.row則是拿到當前那個row的數據  -->
         <template #default="scope">
           <div v-if="isIndexView">
@@ -107,5 +107,17 @@ const isIndexView = computed(() => props.viewPage === 'index' ? true : false);
 <style scoped lang="scss">
 .el-tag {
   color: white;
+  height: auto;
+  max-width: 100%;
+  min-height: 32px;
+  padding-block: 4px;
+  white-space: normal;
+  line-height: 1.4;
+
+  // 標籤文字過長時換行顯示，避免被截斷
+  :deep(.el-tag__content) {
+    white-space: normal;
+    word-break: break-word;
+  }
 }
 </style>
