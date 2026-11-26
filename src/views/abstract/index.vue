@@ -19,6 +19,7 @@
           <el-select v-model="filterAbsType" class="filter-abs-type" placeholder="請選擇投稿類型" @change="getPaperList()">
             <el-option value="Surgical Video Presentation"></el-option>
             <el-option value="Research Presentation"></el-option>
+            <el-option value="E-Poster"></el-option>
             <el-option value="" label="All"></el-option>
           </el-select>
         </div>

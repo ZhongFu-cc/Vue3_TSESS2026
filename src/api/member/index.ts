@@ -1,4 +1,5 @@
 import request from "@/utils/request";
+import type { CreateVipMemberPayload } from "./type";
 import { AxiosPromise } from "axios";
 
 /**
@@ -237,7 +238,7 @@ export function updateUnpaidMemberApi(memberId: string): AxiosPromise {
   });
 }
 
-export function addVipMemberApi(data: any): AxiosPromise {
+export function addVipMemberApi(data: CreateVipMemberPayload): AxiosPromise {
   return request({
     url: "/member/admin",
     method: "post",
